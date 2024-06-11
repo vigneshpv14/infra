@@ -2,23 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('code') {
             steps {
-                git branch: 'main', credentialsId: 'fb19541a-6dec-4508-9319-823c58cbc200', url: 'https://github.com/vigneshpv14/terraform.git'
+                git branch: 'main', credentialsId: '8a1aa051-d418-410f-8213-5e38131df217', url: 'https://github.com/vigneshpv14/infra.git'
             }
         }
-    
-        stage ("terraform init") {
+        stage('Terraform init') {
             steps {
-                sh ("terraform init -reconfigure") 
+                sh 'terraform init'
             }
         }
-        
-        stage ("plan") {
+        stage('Terraform plan') {
             steps {
-                sh ('terraform plan') 
+                sh 'terraform plan'
             }
         }
     }
 }
-    
